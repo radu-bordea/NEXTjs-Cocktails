@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 // Import navigation link data (typed array of section links)
 import { navLinks } from "@/utils/navlinks";
@@ -11,6 +11,13 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+// GSAP plugins
+import { SplitText } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register GSAP plugins (required for them to work)
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
 /**
  * NavBar Component
  * ----------------
@@ -20,7 +27,6 @@ import gsap from "gsap";
  * - Scroll-based background animation using GSAP
  */
 const NavBar = () => {
-
   /**
    * GSAP Animation Hook
    * -------------------
@@ -43,7 +49,7 @@ const NavBar = () => {
         backdropFilter: "blur(10px)", // glass effect
         duration: 1,
         ease: "power1.inOut",
-      }
+      },
     );
   }, []);
 
@@ -51,7 +57,6 @@ const NavBar = () => {
     <nav className="fixed top-0 left-0 w-full z-50">
       {/* Container for layout (logo + links) */}
       <div className="flex items-center justify-between p-4">
-
         {/* Logo + Brand Name (click scrolls to home section) */}
         <Link href="#home" className="flex items-center gap-2">
           <Image
