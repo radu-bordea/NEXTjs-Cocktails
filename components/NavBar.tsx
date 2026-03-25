@@ -14,6 +14,7 @@ import gsap from "gsap";
 // GSAP plugins
 import { SplitText } from "gsap/all";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useState } from "react";
 
 // Register GSAP plugins (required for them to work)
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -27,6 +28,28 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
  * - Scroll-based background animation using GSAP
  */
 const NavBar = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll for background change
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Optional: GSAP for smooth background fade
+  useEffect(() => {
+    gsap.to("nav", {
+      backgroundColor: scrolled ? "rgba(0,0,0,0.7)" : "transparent",
+      backdropFilter: scrolled ? "blur(10px)" : "blur(0px)",
+      duration: 0.5,
+      ease: "power1.out",
+    });
+  }, [scrolled]);
+
   /**
    * GSAP Animation Hook
    * -------------------
@@ -56,21 +79,21 @@ const NavBar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full z-50">
       {/* Container for layout (logo + links) */}
-      <div className="flex items-center justify-between p-4">
+      <div className="flex flex-row items-center justify-between p-4">
         {/* Logo + Brand Name (click scrolls to home section) */}
         <Link href="#home" className="flex items-center gap-2">
           <Image
-            src="/images/logo.png"
+            src="/images/fav.jpg"
             alt="Cocktails Lovable logo"
             width={40}
             height={40}
-            className="object-contain"
+            className="object-contain rounded-full"
           />
           <p className="font-semibold">Cocktails Lovable</p>
         </Link>
 
         {/* Navigation Links */}
-        <ul className="flex gap-6">
+        <ul className="hidden md:flex gap-6 ">
           {navLinks.map((link) => (
             <li key={link.id}>
               {/* Each link scrolls to a section by ID */}
@@ -83,7 +106,46 @@ const NavBar = () => {
             </li>
           ))}
         </ul>
+
+        {/* Hamburger button */}
+        <button
+          className="md:hidden flex flex-col gap-1.5"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          <span
+            className={`block w-6 h-0.5 bg-white transition-transform ${
+              mobileOpen ? "rotate-45 translate-y-2" : ""
+            }`}
+          />
+          <span
+            className={`block w-6 h-0.5 bg-white transition-opacity ${
+              mobileOpen ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`block w-6 h-0.5 bg-white transition-transform ${
+              mobileOpen ? "-rotate-45 -translate-y-2" : ""
+            }`}
+          />
+        </button>
       </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <ul className="md:hidden flex flex-col bg-black/80 backdrop-blur-lg text-white p-6 gap-6">
+          {navLinks.map((link) => (
+            <li key={link.id}>
+              <Link
+                href={`#${link.id}`}
+                onClick={() => setMobileOpen(false)}
+                className="hover:text-yellow-500 transition-colors text-lg"
+              >
+                {link.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </nav>
   );
 };

@@ -11,7 +11,7 @@ import { useMediaQuery } from "react-responsive";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const Hero = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  // const videoRef = useRef<HTMLVideoElement>(null);
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   useGSAP(() => {
@@ -49,51 +49,51 @@ const Hero = () => {
       .to(".left-leaf", { y: -200 }, 0);
 
     // ── Video scroll scrub ──────────────────────────────────────────
-    const startValue = isMobile ? "top 50%" : "center 60%";
-    const endValue = isMobile ? "120% top" : "bottom top";
+    // const startValue = isMobile ? "top 50%" : "center 60%";
+    // const endValue = isMobile ? "120% top" : "bottom top";
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".video-wrapper",
-        start: startValue,
-        end: endValue,
-        scrub: true,
-        pin: true,
-      },
-    });
+    // const tl = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: ".video-wrapper",
+    //     start: startValue,
+    //     end: endValue,
+    //     scrub: true,
+    //     pin: true,
+    //   },
+    // });
 
-    const video = videoRef.current;
+    // const video = videoRef.current;
 
-    if (video) {
-      const setupVideoScrub = () => {
-        if (video.duration && isFinite(video.duration)) {
-          tl.to(video, { currentTime: video.duration });
-        }
-      };
+    // if (video) {
+    //   const setupVideoScrub = () => {
+    //     if (video.duration && isFinite(video.duration)) {
+    //       tl.to(video, { currentTime: video.duration });
+    //     }
+    //   };
 
-      if (video.readyState >= 1) {
-        setupVideoScrub();
-      } else {
-        video.addEventListener("loadedmetadata", setupVideoScrub, { once: true });
-      }
-    }
+    //   if (video.readyState >= 1) {
+    //     setupVideoScrub();
+    //   } else {
+    //     video.addEventListener("loadedmetadata", setupVideoScrub, { once: true });
+    //   }
+    // }
   }, [isMobile]);
 
   return (
     <>
       {/* ── Hero section ─────────────────────────────────────────────── */}
-      <section id="hero" className="noisy">
-        <h1 className="title">MOJITO</h1>
+      <section id="hero" className="relative top-40 sm:top-0">
+        <h1 className="title absolute z-20 w-full">MOJITO</h1>
 
         <img
-          src="/images/hero-left-leaf.png"
+          src="/images/ll.png"
           alt="Decorative left leaf"
-          className="left-leaf"
+          className="left-leaf z-0"
         />
         <img
-          src="/images/hero-right-leaf.png"
+          src="/images/rl.png"
           alt="Decorative right leaf"
-          className="right-leaf"
+          className="right-leaf z-0"
         />
 
         <div className="body">
@@ -106,7 +106,7 @@ const Hero = () => {
             </div>
 
             <div className="view-cocktails">
-              <p className="subtitle">
+              <p className="subtitle hidden sm:block">
                 Every cocktail on our menu is a blend of premium ingredients,
                 creative flair, and timeless recipes — designed to delight your
                 senses
@@ -138,7 +138,7 @@ const Hero = () => {
               without explicit dimensions the video renders at 0×0 (its
               default intrinsic size before the src loads) and stays invisible.
       ──────────────────────────────────────────────────────────────── */}
-      <div className="video-wrapper absolute inset-0  w-full h-screen overflow-hidden">
+      {/* <div className="video-wrapper absolute opacity-20 z-30 inset-0  w-full h-screen overflow-hidden">
         <video
           ref={videoRef}
           muted
@@ -147,7 +147,7 @@ const Hero = () => {
           src="/videos/output.mp4"
           className="w-full h-full object-cover"
         />
-      </div>
+      </div> */}
     </>
   );
 };
