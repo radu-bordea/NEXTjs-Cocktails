@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import NavBar from "@/components/NavBar";
 import Hero from "@/components/Hero";
+import About from "@/components/About";
 import Cocktails from "@/components/Cocktails";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -12,20 +13,20 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
   const bgRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!bgRef.current) return;
+  // useEffect(() => {
+  //   if (!bgRef.current) return;
 
-    gsap.to(bgRef.current, {
-      yPercent: 20, // background moves 20% slower than scroll
-      ease: "none",
-      scrollTrigger: {
-        trigger: bgRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-  }, []);
+  //   gsap.to(bgRef.current, {
+  //     yPercent: 20, // background moves 20% slower than scroll
+  //     ease: "none",
+  //     scrollTrigger: {
+  //       trigger: bgRef.current,
+  //       start: "top top",
+  //       end: "bottom top",
+  //       scrub: true,
+  //     },
+  //   });
+  // }, []);
 
   return (
     <main className="relative w-full overflow-x-hidden">
@@ -40,6 +41,7 @@ export default function Home() {
         <NavBar />
         <Hero />
         <Cocktails />
+        <About />
       </div>
     </main>
   );

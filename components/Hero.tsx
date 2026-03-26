@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
+import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -82,23 +82,27 @@ const Hero = () => {
   return (
     <>
       {/* ── Hero section ─────────────────────────────────────────────── */}
-      <section id="hero" className="relative top-40 sm:top-0">
+      <section id="hero" className="relative sm:top-0">
         <h1 className="title absolute z-20 w-full">MOJITO</h1>
 
-        <img
+        <Image
           src="/images/ll.png"
           alt="Decorative left leaf"
+          width={500}
+          height={500}
           className="left-leaf z-0"
         />
-        <img
+        <Image
           src="/images/rl.png"
           alt="Decorative right leaf"
+          width={500}
+          height={500}
           className="right-leaf z-0"
         />
 
         <div className="body">
-          <div className="content">
-            <div className="space-y-5 hidden md:block">
+          <div className="content absolute top-60">
+            <div className="space-y-5">
               <p>Cool .Crisp .Classic</p>
               <p className="subtitle">
                 Sip the Spirit <br /> of Summer
@@ -106,7 +110,7 @@ const Hero = () => {
             </div>
 
             <div className="view-cocktails">
-              <p className="subtitle hidden sm:block">
+              <p className="subtitle ">
                 Every cocktail on our menu is a blend of premium ingredients,
                 creative flair, and timeless recipes — designed to delight your
                 senses
