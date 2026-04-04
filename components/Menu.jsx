@@ -5,6 +5,7 @@ import { sliderLists } from "@/utils/navlinks";
 import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Image from "next/image";
 
 const Menu = () => {
   const contentRef = useRef();
@@ -62,15 +63,19 @@ const Menu = () => {
 
   return (
     <section id="menu" aria-labelledby="menu-heading">
-      <img
+      <Image
         src="/images/slider-left-leaf.png"
         alt="left-leaf"
         id="m-left-leaf"
-      />
-      <img
+        width={64}
+        height={64}
+        />
+      <Image
         src="/images/slider-right-leaf.png"
         alt="right-leaf"
         id="m-right-leaf"
+        width={64}
+        height={64}
       />
 
       <h2 id="menu-heading" className="sr-only">

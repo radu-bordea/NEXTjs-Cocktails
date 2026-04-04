@@ -8,7 +8,8 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Cocktails from "@/components/Cocktails";
 import Art from "@/components/Art";
-import Menu from "@/components/Menu";
+import Menu from "@/components/Menu";   
+import Contact from "@/components/Contact";   
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,6 +47,7 @@ export default function Home() {
         <About />
         <Art/>
         <Menu/>
+        <Contact/>
       </div>
     </main>
   );
